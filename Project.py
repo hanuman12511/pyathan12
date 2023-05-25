@@ -70,21 +70,49 @@ def DataUpdate():
 user ={"username":["user1","user2","user3"],"password":[123,456,111],"product":{"productid":[1,2,3],"productname":["product1","product2","product3"],"qty":[10,20,34],"rate":[200,300,500],"dis":[2,3,5]},"addtocart":{ "pro_id":[],"pqty":[]} }   
 def prodcut_test(product):
     print("pro test")
+    pos =-1
     pdata = user['product'];
     for j  in range(len(pdata['productid'])):
         if(product == pdata["productname"][j]):
             print(pdata["productname"][j])
-            return True
-    return False
+            pos =j
+            return pos
+    return pos
 
 def addtocart():
     print("**************   add to cart ******************")
     while(True):
         pro_name = input("enter product name")
-        if(prodcut_test(pro_name)):
+        pos = prodcut_test(pro_name)
+        if(pos!=-1):
             print("product found")
+            qty = int(input("enter qty"))
             
-            
+            """l1 =[]
+            l1.append(pos)
+            l2 = []
+            l2.append(qty)
+            cart = {}
+            cart['pro_id']=l1
+            cart['qty'] = l2
+            user["addtocart"] = cart
+            print(user['addtocart']) 
+            """
+            cart = user['addtocart']
+            l1 = user['addtocart']['pro_id']
+            l2 = user['addtocart']['pqty']
+            l1.append(pos)
+            l2.append(qty)
+            print(user)
+            """ 
+            for i in user.keys():
+                if(i=='addtocart'):
+                    print(user[i])
+                    for j in user[i].keys():
+                        print(user[i][j])
+                        data=user[i][j]
+                        data.append(pos)
+             """
         else:
             print("product not  found")
             
